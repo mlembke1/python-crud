@@ -68,6 +68,14 @@ def createNewEntry():
 
     return render_template('create.html', form=form)
 
+#  UPDATE A SPECIFIC JOURNAL ENTRY
+# @app.route('/update', methods=['GET', 'POST'])
+# def updateEntry():
+#     form = updateEntryForm(request.form)
+#     # if request.method == 'POST' and form.validate():
+#
+#     return render_template('update.html', form=form)
+
 
 ############## RUN THE APP ###############
 if __name__ == '__main__':

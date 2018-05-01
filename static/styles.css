@@ -30,7 +30,86 @@ textarea:focus {
   max-width: 80%;
 }
 
-button.btn {
+button.btn, input[type=submit] {
+  background-color: black;
+  color: white;
+  transition: .35s;
+}
+
+button.btn:hover,
+ input[type=submit]:hover {
+  background-color: tan !important;
+}
+
+
+/* FOOTER */
+
+footer {
+  padding:0;
+  background-color: tan !important;
+}
+
+.social-links {
+  font-family: 'Lato', sans-serif;
   display: inline;
-  width: 50px;
+}
+
+.social-links-head {
+  text-decoration: underline;
+  display: inline;
+}
+
+.clickables {
+  color: white;
+}
+
+.clickables:hover {
+  cursor: pointer;
+  color: #00aff0;
+}
+
+.pad {
+  padding: 5px 0px;
+}
+
+.right-pad {
+  padding-right: 4px;
+}
+
+
+.bottom-pad {
+  margin-bottom: 20px;
+}
+
+footer .row .col.s12 {
+  width: 50%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.dropdown-content li>a {
+  color: black !important;
+}
+
+.update,
+.delete {
+  display: inline-block;
+}
+
+.collection {
+  border: none !important;
+}
+
+.collection-item {
+  margin: 1em 0 !important;
+  border: 1px solid tan !important;
+  border-radius: 2px;
 }

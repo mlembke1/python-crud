@@ -2,9 +2,13 @@
 
  {% block body %}
    <h1>Journal Entries</h1>
-    <ul class="list-group">
+    <ul class="collection">
       {% for entry in entries %}
-         <li class="list-group-item"><a href="/journal_entry/{{entries.id}}">{{ entries.name }}</a></li>
+         <li class="collection-item">
+           <a href="/journal_entry/{{entry.id}}">Title: {{ entry.title }}</a>
+           <br>
+           <a href="/journal_entry/{{entry.id}}">Author: {{ entry.author }}</a>
+         </li>
          <button class='update btn btn-warning'>Update</button>
          <button class='delete btn btn-danger'>Delete</button>
       {% endfor %}

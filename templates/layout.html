@@ -11,10 +11,25 @@
     <title>My Flask App</title>
   </head>
   <body>
-    {% include 'includes/_navbar.html' %}
-    <div class="container">
-      {% block body %} {% endblock %}
-    </div>
+    <main>
+      {% include 'includes/_navbar.html' %}
+      <div class="container">
+        {% block body %} {% endblock %}
+      </div>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col l5 m5 s6"></div>
+            <div class="col l2 hide-on-small-and-down"></div>
+            <div class="col l5 m5 s6 right-align">
+                <a href="https://www.linkedin.com/in/mitchell-lembke/" target="_blank" class="clickables">
+                  <p class="social-links clickables pad">Developed Mitch Lembke</p>
+                </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

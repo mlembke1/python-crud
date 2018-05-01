@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+node_modules/
+.DS_Store
+.env
+yarn.lock
+package-lock.json

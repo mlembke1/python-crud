@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+ {% block body %}
+   <h1>Journal Entries</h1>
+    <ul class="list-group">
+      {% for entry in entries %}
+         <li class="list-group-item"><a href="/journal_entry/{{entries.id}}">{{ entries.name }}</a></li>
+         <button class='update btn btn-warning'>Update</button>
+         <button class='delete btn btn-danger'>Delete</button>
+      {% endfor %}
+    </ul>
+ {% endblock %}

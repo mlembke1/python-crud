@@ -1,0 +1,17 @@
+html {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+nav {
+  background-color: tan;
+  letter-spacing: 3px;
+}
+
+input[type=text]:not(.browser-default) {
+  border-bottom: 3px solid tan !important;
+}
+
+button.btn {
+  display: inline;
+  width: 50px;
+}

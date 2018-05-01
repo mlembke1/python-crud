@@ -14,6 +14,7 @@
     <main>
       {% include 'includes/_navbar.html' %}
       <div class="container">
+        {% include 'includes/_flashMessages.html' %}
         {% block body %} {% endblock %}
       </div>
     </main>
@@ -24,7 +25,7 @@
             <div class="col l2 hide-on-small-and-down"></div>
             <div class="col l5 m5 s6 right-align">
                 <a href="https://www.linkedin.com/in/mitchell-lembke/" target="_blank" class="clickables">
-                  <p class="social-links clickables pad">Developed Mitch Lembke</p>
+                  <p class="social-links clickables pad">Developed by <br>Mitch Lembke</p>
                 </a>
             </div>
           </div>

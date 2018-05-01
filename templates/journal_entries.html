@@ -4,13 +4,15 @@
    <h1>Journal Entries</h1>
     <ul class="collection">
       {% for entry in entries %}
-         <li class="collection-item">
+         <li class="center-align collection-item">
            <a href="/journal_entry/{{entry.id}}">Title: {{ entry.title }}</a>
            <br>
            <a href="/journal_entry/{{entry.id}}">Author: {{ entry.author }}</a>
          </li>
-         <button class='update btn btn-warning'>Update</button>
-         <button class='delete btn btn-danger'>Delete</button>
+         <li class="center-align">
+           <button class='update btn btn-warning'>Update</button>
+           <button class='delete btn btn-danger'>Delete</button>
+         </li>
       {% endfor %}
     </ul>
  {% endblock %}

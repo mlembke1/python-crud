@@ -1,6 +1,5 @@
 ####### IMPORTING DEPENDENCIES #########
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
-from data import Entries
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from flask_mysqldb import MySQL
@@ -17,7 +16,6 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # INITIATE MYSQL
 mysql = MySQL(app)
 
-Entries = Entries()
 
 ######## SERVER SIDE VALIDATION FOR FORM ######
 class newEntryForm(Form):
@@ -35,6 +33,20 @@ def home():
 # VIEW ALL JOURNAL ENTRIES
 @app.route('/read')
 def journal_entries():
+    #  CREATE CURSOR
+    cur = mysql.connection.cursor()
+
+    # EXECUTE QUERY
+    cur.execute('''SELECT * FROM entries''')
+
+    #  COMMIT TO DATABASE
+    mysql.connection.commit()
+
+    Entries = cur.fetchall()
+
+    # CLOSE THE CONNECTION
+    cur.close()
+
     return render_template('journal_entries.html', entries = Entries)
 
 #  UPDATE A JOURNAL ENTRY
@@ -57,14 +69,45 @@ def about():
 #  GET SPECIFIC JOURNAL ENTRY BY ITS ID
 @app.route('/journal_entry/<string:id>/')
 def journal_entry(id):
-    return render_template('journal_entry.html', id=id)
+    #  CREATE CURSOR
+    cur = mysql.connection.cursor()
+
+    # EXECUTE QUERY
+    cur.execute('''SELECT * FROM entries WHERE id = %s''', [id])
+
+    #  COMMIT TO DATABASE
+    mysql.connection.commit()
+
+    entry = cur.fetchall()
+
+    # CLOSE THE CONNECTION
+    cur.close()
+    return render_template('journal_entry.html', entry = entry[0])
 
 
 #  CREATE A NEW JOURNAL ENTRY
 @app.route('/create', methods=['GET', 'POST'])
 def createNewEntry():
     form = newEntryForm(request.form)
-    # if request.method == 'POST' and form.validate():
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        author = form.author.data
+        journal_entry = form.journal_entry.data
+
+        #  CREATE CURSOR
+        cur = mysql.connection.cursor()
+
+        # EXECUTE QUERY
+        cur.execute('''INSERT INTO entries(title, author, journal_entry) VALUES(%s, %s, %s)''', (title, author, journal_entry))
+
+        #  COMMIT TO DATABASE
+        mysql.connection.commit()
+
+        # CLOSE THE CONNECTION
+        cur.close()
+
+        flash('You have posted a new journal entry!', 'success')
+        redirect('/read')
 
     return render_template('create.html', form=form)
 
@@ -79,4 +122,5 @@ def createNewEntry():
 
 ############## RUN THE APP ###############
 if __name__ == '__main__':
+    app.secret_key='supersecret'
     app.run(debug=True)

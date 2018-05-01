@@ -7,8 +7,27 @@ nav {
   letter-spacing: 3px;
 }
 
-input[type=text]:not(.browser-default) {
-  border-bottom: 3px solid tan !important;
+input, textarea {
+  max-width: 40%;
+  transition: ease-in-out, width .5s ease-in-out;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid tan;
+  -webkit-box-shadow: 0 1px 0 0 tan;
+  max-width: 80%;
+}
+
+textarea {
+  border: none;
+  border-bottom: .1px solid black;
+}
+
+textarea:focus {
+  outline: none;
+  border-bottom: 1px solid tan;
+  -webkit-box-shadow: 0 1px 0 0 tan;
+  max-width: 80%;
 }
 
 button.btn {

@@ -1,3 +1,3 @@
 $(document).ready(() => {
-    $(".dropdown-trigger").dropdown();
+      $(".dropdown-trigger").dropdown()
 })

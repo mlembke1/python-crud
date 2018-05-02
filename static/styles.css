@@ -5,6 +5,7 @@ html {
 nav {
   background-color: tan;
   letter-spacing: 3px;
+  border-bottom: 2px solid #97A7B2;
 }
 
 input, textarea {
@@ -32,13 +33,13 @@ textarea:focus {
 
 button.btn, input[type=submit] {
   background-color: black;
-  color: white;
+  color: white !important;
   transition: .35s;
 }
 
 button.btn:hover,
  input[type=submit]:hover {
-  background-color: tan !important;
+  opacity: 1.2 !important;
 }
 
 
@@ -47,12 +48,13 @@ button.btn:hover,
 footer {
   padding:0;
   background-color: tan !important;
+  border-top: 2px solid #97A7B2;
 }
-
+/*
 .social-links {
   font-family: 'Lato', sans-serif;
   display: inline;
-}
+} */
 
 .social-links-head {
   text-decoration: underline;
@@ -99,9 +101,17 @@ main {
   color: black !important;
 }
 
-.update,
-.delete {
+.update-button,
+.delete-button {
   display: inline-block;
+}
+
+.update-button {
+  background-color: #F3DE8A !important;
+}
+
+.delete-button {
+  background-color: #EB9486 !important;
 }
 
 .collection {
@@ -112,4 +122,21 @@ main {
   margin: 2em 0 .5em 0 !important;
   border-bottom: 1px solid tan !important;
   border-radius: 2px;
+}
+
+.message-status {
+  margin-top: 2em;
+}
+
+.delete-message {
+  color: tomato !important;
+  font-weight: bold;
+}
+
+.back-to-read {
+  background-color: #7E7F9A !important;
+}
+
+#create-entry-button {
+  background-color: #7E7F9A !important;
 }

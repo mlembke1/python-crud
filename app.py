@@ -30,6 +30,9 @@ class newEntryForm(Form):
 def home():
     return render_template('home.html')
 
+
+
+
 # VIEW ALL JOURNAL ENTRIES
 @app.route('/read')
 def journal_entries():
@@ -49,22 +52,64 @@ def journal_entries():
 
     return render_template('journal_entries.html', entries = Entries)
 
+
+
+
+
 #  UPDATE A JOURNAL ENTRY
 @app.route('/update')
 def update():
     return render_template('update.html')
 
-#  DELETE A JOURNAL ENTRY
-# @app.route('/delete')
-# def about():
-#     DELETE FROM table_name
-#     WHERE condition;
-#     return render_template('delete.html')
+
+
+
+
+ # DELETE A JOURNAL ENTRY
+@app.route('/delete/<string:id>', methods=['GET', 'DELETE'])
+def delete(id):
+    if request.method == 'DELETE':
+                # CREATE CURSOR
+                cur = mysql.connection.cursor()
+
+                # EXECUTE QUERIES
+                cur.execute ('''DELETE FROM entries WHERE id=%s''', [id])
+
+                #  COMMIT TO DATABASE
+                mysql.connection.commit()
+
+                # CLOSE THE CONNECTION
+                cur.close()
+
+
+    # CREATE CURSOR
+    cur = mysql.connection.cursor()
+
+    # EXECUTE QUERIES
+    cur.execute('''SELECT * FROM entries WHERE id=%s''', [id])
+
+    #  COMMIT TO DATABASE
+    mysql.connection.commit()
+
+    Entry = cur.fetchall()
+
+    # CLOSE THE CONNECTION
+    cur.close()
+
+    return render_template('delete.html', entry = Entry[0])
+
+
 
 #  ABOUT ME
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+
+
+
+
+
 
 #  GET SPECIFIC JOURNAL ENTRY BY ITS ID
 @app.route('/journal_entry/<string:id>/')
@@ -83,6 +128,12 @@ def journal_entry(id):
     # CLOSE THE CONNECTION
     cur.close()
     return render_template('journal_entry.html', entry = entry[0])
+
+
+
+
+
+
 
 
 #  CREATE A NEW JOURNAL ENTRY
@@ -111,13 +162,48 @@ def createNewEntry():
 
     return render_template('create.html', form=form)
 
-#  UPDATE A SPECIFIC JOURNAL ENTRY
+
+
+
+
+
+
+
+#  # UPDATE A SPECIFIC JOURNAL ENTRY
 # @app.route('/update', methods=['GET', 'POST'])
 # def updateEntry():
-#     form = updateEntryForm(request.form)
-#     # if request.method == 'POST' and form.validate():
+#     form = newEntryForm(request.form)
+#     if request.method == 'POST' and form.validate():
+#         title = form.title.data
+#         author = form.author.data
+#         journal_entry = form.journal_entry.data
 #
+#         #  CREATE CURSOR
+#         cur = mysql.connection.cursor()
+#
+#         # EXECUTE QUERY
+#         cur.execute('''INSERT INTO entries(title, author, journal_entry) VALUES(%s, %s, %s)''', (title, author, journal_entry))
+#         cursor.execute ("""
+#            UPDATE entries
+#            SET Year=%s, Month=%s, Day=%s, Hour=%s, Minute=%s
+#            WHERE id=%s
+#         """, (Year, Month, Day, Hour, Minute, id))
+#
+#         #  COMMIT TO DATABASE
+#         mysql.connection.commit()
+#
+#         # CLOSE THE CONNECTION
+#         cur.close()
+#
+#         flash('You have updated the journal entry!', 'success')
+#         redirect('/read')
 #     return render_template('update.html', form=form)
+
+
+
+
+
+
 
 
 ############## RUN THE APP ###############

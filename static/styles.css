@@ -19,6 +19,10 @@ main {
 a {
   color: black;
 }
+
+.bold {
+  font-weight: bold;
+}
 /************* HEADER STYLES ***********/
 
 
@@ -174,3 +178,10 @@ footer .row .col.s12 {
 }
 
 /************* END FOOTER STYLES ***********/
+
+/************* SPECIFIC ENTRY STYLES ***********/
+
+.specific-entry {
+  border-bottom: 1px solid tan;
+  margin-top: 6em;
+}

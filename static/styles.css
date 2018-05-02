@@ -17,8 +17,16 @@ main {
   margin-top: 6em !important;
 }
 
+/************* HEADER STYLES ***********/
+
+
 .create-header {
   margin-top: 4em;
+  letter-spacing: 5px;
+}
+
+.je-header {
+  margin-top: 2em;
   letter-spacing: 5px;
 }
 
@@ -40,6 +48,7 @@ nav {
 input, textarea {
   max-width: 85%;
   transition: .5s !important;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) {
@@ -60,6 +69,7 @@ textarea:focus {
   -webkit-box-shadow: 0 1px 0 0 tan;
   max-width: 90%;
 }
+
 
 /************* BUTTON STYLES ***********/
 

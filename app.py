@@ -62,19 +62,19 @@ def update():
 @app.route('/delete/<string:id>', methods=['GET', 'DELETE'])
 def delete(id):
     if request.method == 'DELETE':
-            # CREATE CURSOR
-            cur = mysql.connection.cursor()
+        # CREATE CURSOR
+        cur = mysql.connection.cursor()
 
-            # EXECUTE QUERIES
-            cur.execute ('''DELETE FROM entries WHERE id=%s''', [id])
+        # EXECUTE QUERIES
+        cur.execute ('''DELETE FROM entries WHERE id=%s''', [id])
 
-            #  COMMIT TO DATABASE
-            mysql.connection.commit()
+        #  COMMIT TO DATABASE
+        mysql.connection.commit()
 
-            # CLOSE THE CONNECTION
-            cur.close()
+        # CLOSE THE CONNECTION
+        cur.close()
 
-            return redirect(url_for('read'), code=303)
+        return redirect(url_for('read'), code=303)
 
     # CREATE CURSOR
     cur = mysql.connection.cursor()

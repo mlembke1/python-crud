@@ -30,14 +30,14 @@ nav {
 
 /************* FORM ELEMENT STYLES ***********/
 input, textarea {
-  max-width: 40%;
-  transition: ease-in-out, width .5s ease-in-out;
+  max-width: 55%;
+  transition: .5s !important;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) {
   border-bottom: 1px solid tan;
   -webkit-box-shadow: 0 1px 0 0 tan;
-  max-width: 80%;
+  max-width: 60%;
 }
 
 textarea {
@@ -49,7 +49,7 @@ textarea:focus {
   outline: none;
   border-bottom: 1px solid tan;
   -webkit-box-shadow: 0 1px 0 0 tan;
-  max-width: 80%;
+  max-width: 60%;
 }
 
 /************* BUTTON STYLES ***********/

@@ -54,11 +54,27 @@ def read():
 
         return render_template('journal_entries.html', entries = Entries)
 
-#  UPDATE A JOURNAL ENTRY
-# @app.route('/update/<string:id>', methods=['PUT', 'GET'])
-# def update(id):
-#     if request.method == 'PUT'
-#     return render_template('update.html')
+ # UPDATE A JOURNAL ENTRY
+@app.route('/update/<string:id>', methods=['PUT', 'GET'])
+def update(id):
+        # if request.method == 'PUT'
+        # return render_template('update.html')
+
+    # CREATE CURSOR
+    cur = mysql.connection.cursor()
+
+    # EXECUTE QUERIES
+    cur.execute('''SELECT * FROM entries WHERE id=%s''', [id])
+
+    #  COMMIT TO DATABASE
+    mysql.connection.commit()
+
+    Entry = cur.fetchall()
+
+    # CLOSE THE CONNECTION
+    cur.close()
+
+    return render_template('update.html', entry = Entry[0])
 
 
  # DELETE A JOURNAL ENTRY

@@ -1,7 +1,27 @@
 {% extends 'layout.html' %}
 
-{% block body %}
-  <h3>{{entry.title}}</h3>
-  <h6>Author: {{entry.author}}</h6>
-  <p>{{entry.journal_entry}}</p>
-{% endblock %}
+ {% block body %}
+ <div class="center-align">
+   <h6 class="text-center uje-header">UPDATE JOURNAL ENTRY</h6>
+   {% from "includes/_formhelpers.html" import render_field %}
+    <div class="row">
+        <div class="col-lg-3 col-sm-1"></div>
+        <div class="col-lg-6 col-sm-10">
+         <form method="PUT">
+          	<div class="form-group">
+          		<input type="text" name="author" class="form-control" value="{{entry.author}}">
+          	</div>
+          	<div class="form-group">
+          		<input type="text" name="title" class="form-control" value="{{entry.title}}">
+          	</div>
+            <div class="form-group">
+          		<textarea type="text" name="journal_entry" class="form-control">{{entry.journal_entry}}</textarea>
+          	</div>
+            <a href="/read"><button class='btn back-to-read'><i class='material-icons'>arrow_back</i></button></a>
+          	<input data-id="{{entry.id}}" id="update-entry-button" type="submit" class="update-button btn" value="Update">
+          </form>
+        </div>
+      <div class="col-lg-3 col-sm-1"></div>
+    </div>
+  </div>
+ {% endblock %}

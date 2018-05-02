@@ -30,6 +30,11 @@ main {
   letter-spacing: 5px;
 }
 
+.uje-header {
+  margin-top: 2em;
+  letter-spacing: 5px;
+}
+
 /************* NAV BAR STYLES ***********/
 nav {
   background-color: tan;
@@ -90,23 +95,19 @@ button.btn:hover,
   display: inline-block;
 }
 
-.update-button {
+/* .update-button {
   background-color: tan !important;
-}
+} */
 
 .delete-button {
   background-color: #EB9486 !important;
 }
 
 
-#create-entry-button {
-  background-color: #7E7F9A !important;
+#create-entry-button, .update-button, .back-to-read {
+  background-color: grey !important;
 }
 
-
-.back-to-read {
-  background-color: tan !important;
-}
 
 
 /************* LIST ITEM STYLES ***********/

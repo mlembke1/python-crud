@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 
  {% block body %}
- <div class="align-middle">
+ <div class="center-align">
    <h3 class="text-center">NEW JOURNAL ENTRY</h3>
    {% from "includes/_formhelpers.html" import render_field %}
     <div class="row">
         <div class="col-lg-3 col-sm-1"></div>
-        <div class="col-lg-6 col-sm-10 text-center">
+        <div class="col-lg-6 col-sm-10">
          <form method="POST">
           	<div class="form-group">
           		<input type="text" name="author" class="form-control" placeholder="Author" value="{{request.form.author}}">

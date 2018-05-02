@@ -6,12 +6,12 @@
       {% for entry in entries %}
          <li class="center-align collection-item">
           <div class="row valign-wrapper">
-            <div class="col l3 m4 s6">
+            <div class="col l3 m4 s12">
              <a href="/journal_entry/{{entry.id}}"><h5>Title: {{ entry.title }}</h5></a>
              <a href="/journal_entry/{{entry.id}}"><h5>Author: {{ entry.author }}</h5></a>
             </div>
             <div class="col l6 m4 s0"></div>
-            <div class="col l3 m4 s6">
+            <div class="col l3 m4 s12">
                <a href="/update/{{entry.id}}"><button class='update-button btn'>Update</button></a>
                <br>
                <br>

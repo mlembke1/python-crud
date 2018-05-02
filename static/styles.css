@@ -1,13 +1,34 @@
+/************* MAIN STYLES ***********/
 html {
   font-family: 'Montserrat', sans-serif !important;
 }
 
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/************* NAV BAR STYLES ***********/
 nav {
   background-color: tan;
   letter-spacing: 3px;
   border-bottom: 2px solid #97A7B2;
 }
 
+
+.dropdown-content li>a {
+  color: black !important;
+}
+
+
+
+/************* FORM ELEMENT STYLES ***********/
 input, textarea {
   max-width: 40%;
   transition: ease-in-out, width .5s ease-in-out;
@@ -31,6 +52,8 @@ textarea:focus {
   max-width: 80%;
 }
 
+/************* BUTTON STYLES ***********/
+
 button.btn, input[type=submit] {
   background-color: black;
   color: white !important;
@@ -43,18 +66,60 @@ button.btn:hover,
 }
 
 
-/* FOOTER */
+.update-button,
+.delete-button {
+  display: inline-block;
+}
 
+.update-button {
+  background-color: #F3DE8A !important;
+}
+
+.delete-button {
+  background-color: #EB9486 !important;
+}
+
+
+#create-entry-button {
+  background-color: #7E7F9A !important;
+}
+
+
+.back-to-read {
+  background-color: #7E7F9A !important;
+}
+
+
+/************* LIST ITEM STYLES ***********/
+
+.collection {
+  border: none !important;
+}
+
+.collection-item {
+  margin: 2em 0 .5em 0 !important;
+  border-bottom: 1px solid tan !important;
+  border-radius: 2px;
+}
+
+
+/************* SUCCESS MESSAGE STYLES ***********/
+
+.message-status {
+  margin-top: 2em;
+}
+
+.delete-message {
+  color: tomato !important;
+  font-weight: bold;
+}
+
+/************* FOOTER STYLES ***********/
 footer {
   padding:0;
   background-color: tan !important;
   border-top: 2px solid #97A7B2;
 }
-/*
-.social-links {
-  font-family: 'Lato', sans-serif;
-  display: inline;
-} */
 
 .social-links-head {
   text-decoration: underline;
@@ -87,56 +152,4 @@ footer .row .col.s12 {
   width: 50%;
 }
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
-}
-
-.dropdown-content li>a {
-  color: black !important;
-}
-
-.update-button,
-.delete-button {
-  display: inline-block;
-}
-
-.update-button {
-  background-color: #F3DE8A !important;
-}
-
-.delete-button {
-  background-color: #EB9486 !important;
-}
-
-.collection {
-  border: none !important;
-}
-
-.collection-item {
-  margin: 2em 0 .5em 0 !important;
-  border-bottom: 1px solid tan !important;
-  border-radius: 2px;
-}
-
-.message-status {
-  margin-top: 2em;
-}
-
-.delete-message {
-  color: tomato !important;
-  font-weight: bold;
-}
-
-.back-to-read {
-  background-color: #7E7F9A !important;
-}
-
-#create-entry-button {
-  background-color: #7E7F9A !important;
-}
+/************* END FOOTER STYLES ***********/

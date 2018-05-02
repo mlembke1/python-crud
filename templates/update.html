@@ -2,7 +2,7 @@
 
  {% block body %}
  <div class="center-align">
-   <h6 class="text-center uje-header">UPDATE JOURNAL ENTRY</h6>
+   <h6 class="text-center uje-header">UPDATE JOURNAL ENTRY "{{entry.title}}"</h6>
    {% from "includes/_formhelpers.html" import render_field %}
     <div class="row">
         <div class="col-lg-3 col-sm-1"></div>
@@ -17,8 +17,8 @@
             <div class="form-group">
           		<textarea id="update-journal_entry-input" placeholder="JOURNAL ENTRY: {{entry.journal_entry}}" type="text" name="journal_entry" value='{{request.form.journal_entry}}' class="form-control"></textarea>
           	</div>
-            <a href="/read"><button class='btn back-to-read'><i class='material-icons'>arrow_back</i></button></a>
           	<input data-id="{{entry.id}}" id="confirm-update-button" type="submit" class="update-button btn" value="Update">
+            <a href="/read"><input type="button" class='btn back-to-read' value='CANCEL'></a>
           </form>
         </div>
       <div class="col-lg-3 col-sm-1"></div>

@@ -6,16 +6,16 @@
       {% for entry in entries %}
          <li class="center-align collection-item">
           <div class="row valign-wrapper">
-            <div class="col l3 m4 s12">
-             <a href="/journal_entry/{{entry.id}}"><h5>Title: {{ entry.title }}</h5></a>
-             <a href="/journal_entry/{{entry.id}}"><h5>Author: {{ entry.author }}</h5></a>
+            <div class="col l7 m4 s12 left-align">
+             <a href="/journal_entry/{{entry.id}}"><h6>Title: {{ entry.title }}</h6></a>
+             <a href="/journal_entry/{{entry.id}}"><h6>Author: {{ entry.author }}</h6></a>
             </div>
-            <div class="col l6 m4 s0"></div>
+            <!-- <div class="col l6 m4 s0"></div> -->
             <div class="col l3 m4 s12">
-               <a href="/update/{{entry.id}}"><button class='update-button btn'>Update</button></a>
+               <a href="/update/{{entry.id}}"><button class='update-button btn btn-small'>Update</button></a>
                <br>
                <br>
-               <a href="/delete/{{entry.id}}"><button class='delete-button btn'>Delete</button></a>
+               <a href="/delete/{{entry.id}}"><button class='delete-button btn btn-small'>Delete</button></a>
             </div>
           </div>
          </li>

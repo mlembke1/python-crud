@@ -16,7 +16,9 @@ main {
 .about-page {
   margin-top: 6em !important;
 }
-
+a {
+  color: black;
+}
 /************* HEADER STYLES ***********/
 
 
@@ -107,7 +109,6 @@ button.btn:hover,
 #create-entry-button, .update-button, .back-to-read {
   background-color: grey !important;
 }
-
 
 
 /************* LIST ITEM STYLES ***********/

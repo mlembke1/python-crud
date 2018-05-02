@@ -1,4 +1,5 @@
 ####### IMPORTING DEPENDENCIES #########
+import os
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 from flask_json import FlaskJSON, json_response
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators

@@ -81,6 +81,8 @@ def delete(id):
                 # CLOSE THE CONNECTION
                 cur.close()
 
+                return redirect(url_for('/read'))
+
 
     # CREATE CURSOR
     cur = mysql.connection.cursor()

@@ -14,8 +14,10 @@
     <main>
       {% include 'includes/_navbar.html' %}
       <div class="container">
-        {% include 'includes/_flashMessages.html' %}
         {% block body %} {% endblock %}
+      </div>
+      <div class="center-align">
+        {% include 'includes/_flashMessages.html' %}
       </div>
     </main>
     <footer class="page-footer">

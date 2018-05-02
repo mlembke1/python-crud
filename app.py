@@ -1,10 +1,12 @@
 ####### IMPORTING DEPENDENCIES #########
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
+from flask_json import FlaskJSON, json_response
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+json = FlaskJSON(app)
 
 # MYSQL CONFIGURATION
 app.config['MYSQL_HOST'] = 'localhost'
@@ -53,9 +55,10 @@ def read():
         return render_template('journal_entries.html', entries = Entries)
 
 #  UPDATE A JOURNAL ENTRY
-@app.route('/update')
-def update():
-    return render_template('update.html')
+# @app.route('/update/<string:id>', methods=['PUT', 'GET'])
+# def update(id):
+#     if request.method == 'PUT'
+#     return render_template('update.html')
 
 
  # DELETE A JOURNAL ENTRY
@@ -74,7 +77,7 @@ def delete(id):
         # CLOSE THE CONNECTION
         cur.close()
 
-        return redirect(url_for('read'), code=303)
+        return json_response(message='success')
 
     # CREATE CURSOR
     cur = mysql.connection.cursor()
@@ -126,10 +129,6 @@ def journal_entry(id):
 
 
 
-
-
-
-
 #  CREATE A NEW JOURNAL ENTRY
 @app.route('/create', methods=['GET', 'POST'])
 def createNewEntry():
@@ -151,8 +150,7 @@ def createNewEntry():
         # CLOSE THE CONNECTION
         cur.close()
 
-        flash('You have posted a new journal entry!', 'success')
-        redirect('/read')
+        return redirect('/read')
 
     return render_template('create.html', form=form)
 

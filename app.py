@@ -25,6 +25,11 @@ class newEntryForm(Form):
     title  = StringField('Title', [validators.Length(min=4, max=50)])
     journal_entry  = StringField('Journal Entry', [validators.Length(min=4, max=500)])
 
+class updateEntryForm(Form):
+    author = StringField('Author', [validators.Length(min=1, max=50)])
+    title  = StringField('Title', [validators.Length(min=4, max=50)])
+    journal_entry  = StringField('Journal Entry', [validators.Length(min=4, max=500)])
+
 
 ############# ROUTES #############
 # GET HOME PAGE
@@ -57,8 +62,24 @@ def read():
  # UPDATE A JOURNAL ENTRY
 @app.route('/update/<string:id>', methods=['PUT', 'GET'])
 def update(id):
-        # if request.method == 'PUT'
-        # return render_template('update.html')
+    form = updateEntryForm(request.form)
+    if request.method == 'PUT':
+        title = form.title.data
+        author = form.author.data
+        journal_entry = form.journal_entry.data
+        # CREATE CURSOR
+        cur = mysql.connection.cursor()
+
+        # EXECUTE QUERIES
+        cur.execute ('''UPDATE entries SET title = %s, author = %s, journal_entry = %s WHERE id=%s''', (title, author, journal_entry, id))
+
+        #  COMMIT TO DATABASE
+        mysql.connection.commit()
+
+        # CLOSE THE CONNECTION
+        cur.close()
+
+        return json_response(message='success')
 
     # CREATE CURSOR
     cur = mysql.connection.cursor()

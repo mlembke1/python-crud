@@ -35,26 +35,22 @@ def home():
 
 # VIEW ALL JOURNAL ENTRIES
 @app.route('/read')
-def journal_entries():
-    #  CREATE CURSOR
-    cur = mysql.connection.cursor()
+def read():
+        #  CREATE CURSOR
+        cur = mysql.connection.cursor()
 
-    # EXECUTE QUERY
-    cur.execute('''SELECT * FROM entries''')
+        # EXECUTE QUERY
+        cur.execute('''SELECT * FROM entries''')
 
-    #  COMMIT TO DATABASE
-    mysql.connection.commit()
+        #  COMMIT TO DATABASE
+        mysql.connection.commit()
 
-    Entries = cur.fetchall()
+        Entries = cur.fetchall()
 
-    # CLOSE THE CONNECTION
-    cur.close()
+        # CLOSE THE CONNECTION
+        cur.close()
 
-    return render_template('journal_entries.html', entries = Entries)
-
-
-
-
+        return render_template('journal_entries.html', entries = Entries)
 
 #  UPDATE A JOURNAL ENTRY
 @app.route('/update')
@@ -62,27 +58,23 @@ def update():
     return render_template('update.html')
 
 
-
-
-
  # DELETE A JOURNAL ENTRY
 @app.route('/delete/<string:id>', methods=['GET', 'DELETE'])
 def delete(id):
     if request.method == 'DELETE':
-                # CREATE CURSOR
-                cur = mysql.connection.cursor()
+            # CREATE CURSOR
+            cur = mysql.connection.cursor()
 
-                # EXECUTE QUERIES
-                cur.execute ('''DELETE FROM entries WHERE id=%s''', [id])
+            # EXECUTE QUERIES
+            cur.execute ('''DELETE FROM entries WHERE id=%s''', [id])
 
-                #  COMMIT TO DATABASE
-                mysql.connection.commit()
+            #  COMMIT TO DATABASE
+            mysql.connection.commit()
 
-                # CLOSE THE CONNECTION
-                cur.close()
+            # CLOSE THE CONNECTION
+            cur.close()
 
-                return redirect(url_for('/read'))
-
+            return redirect(url_for('read'), code=303)
 
     # CREATE CURSOR
     cur = mysql.connection.cursor()

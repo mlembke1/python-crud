@@ -13,6 +13,14 @@ body {
 main {
   flex: 1 0 auto;
 }
+.about-page {
+  margin-top: 6em !important;
+}
+
+.create-header {
+  margin-top: 4em;
+  letter-spacing: 5px;
+}
 
 /************* NAV BAR STYLES ***********/
 nav {
@@ -30,26 +38,27 @@ nav {
 
 /************* FORM ELEMENT STYLES ***********/
 input, textarea {
-  max-width: 55%;
+  max-width: 85%;
   transition: .5s !important;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) {
   border-bottom: 1px solid tan;
   -webkit-box-shadow: 0 1px 0 0 tan;
-  max-width: 60%;
+  max-width: 90%;
 }
 
 textarea {
   border: none;
   border-bottom: .1px solid black;
+  height: 165px;
 }
 
 textarea:focus {
   outline: none;
   border-bottom: 1px solid tan;
   -webkit-box-shadow: 0 1px 0 0 tan;
-  max-width: 60%;
+  max-width: 90%;
 }
 
 /************* BUTTON STYLES ***********/
@@ -72,7 +81,7 @@ button.btn:hover,
 }
 
 .update-button {
-  background-color: #F3DE8A !important;
+  background-color: tan !important;
 }
 
 .delete-button {
@@ -86,7 +95,7 @@ button.btn:hover,
 
 
 .back-to-read {
-  background-color: #7E7F9A !important;
+  background-color: tan !important;
 }
 
 

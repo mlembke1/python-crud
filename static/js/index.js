@@ -11,7 +11,6 @@ $(document).ready(() => {
       $('#confirm-delete-button').click((e) => {
         e.preventDefault()
         const id = $(e.target).data('id')
-        console.log(id)
         $.ajax({
             url: `/delete/${id}`,
             type: 'DELETE'

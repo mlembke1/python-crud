@@ -25,8 +25,7 @@ app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
 app.config['MYSQL_USER'] = 'b43c45647f5a8f'
 app.config['MYSQL_PASSWORD'] = '23cb224a'
 app.config['MYSQL_DB'] = 'heroku_48ce68a75f1876f'
-app.config['DATABASE_URL'] = os.environ.get('CLEARDB_DATABASE_URL')
-app.config['MYSQL_PORT'] = 3306
+app.config['MYSQL_PORT'] = 5000
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # INITIATE MYSQL

@@ -29,7 +29,8 @@ app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # INITIATE MYSQL
-mysql = MySQL(app)
+mysql = MySQL()
+mysql.init_app(app)
 
 
 
@@ -204,49 +205,6 @@ def createNewEntry():
         return redirect('/read')
 
     return render_template('create.html', form=form)
-
-
-
-
-
-
-
-
-#  # UPDATE A SPECIFIC JOURNAL ENTRY
-# @app.route('/update', methods=['GET', 'POST'])
-# def updateEntry():
-#     form = newEntryForm(request.form)
-#     if request.method == 'POST' and form.validate():
-#         title = form.title.data
-#         author = form.author.data
-#         journal_entry = form.journal_entry.data
-#
-#         #  CREATE CURSOR
-#         cur = mysql.connection.cursor()
-#
-#         # EXECUTE QUERY
-#         cur.execute('''INSERT INTO entries(title, author, journal_entry) VALUES(%s, %s, %s)''', (title, author, journal_entry))
-#         cursor.execute ("""
-#            UPDATE entries
-#            SET Year=%s, Month=%s, Day=%s, Hour=%s, Minute=%s
-#            WHERE id=%s
-#         """, (Year, Month, Day, Hour, Minute, id))
-#
-#         #  COMMIT TO DATABASE
-#         mysql.connection.commit()
-#
-#         # CLOSE THE CONNECTION
-#         cur.close()
-#
-#         flash('You have updated the journal entry!', 'success')
-#         redirect('/read')
-#     return render_template('update.html', form=form)
-
-
-
-
-
-
 
 
 ############## RUN THE APP ###############

@@ -9,19 +9,28 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 json = FlaskJSON(app)
 
-# MYSQL CONFIGURATION
+
+# # MYSQL CONFIGURATION LOCAL
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'mitch'
+# app.config['MYSQL_PASSWORD'] = 'mlembke1'
+# app.config['MYSQL_DB'] = 'entries'
+# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+# SET SECRET KEY
+app.secret_key=os.environ.get('SECRET_KEY')
+
+# MYSQL CONFIGURATION DEPLOYED
 app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
 app.config['MYSQL_USER'] = 'b43c45647f5a8f'
 app.config['MYSQL_PASSWORD'] = '23cb224a'
-app.config['MYSQL_DB'] = 'heroku_48ce68a75f1876f'
+app.config['MYSQL_DB'] = 'heroku_48ce68a75f1876f.entries'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # INITIATE MYSQL
 mysql = MySQL(app)
 
-# SET SECRET KEY
-app.secret_key=os.environ.get('SECRET_KEY')
 
 
 ######## SERVER SIDE VALIDATION FOR FORM ######

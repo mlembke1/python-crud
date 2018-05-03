@@ -52,9 +52,38 @@ class updateEntryForm(Form):
 def home():
     return render_template('home.html')
 
+# ######################## CREATE ###########################################
+#  CREATE A NEW JOURNAL ENTRY
+@app.route('/create', methods=['GET', 'POST'])
+def createNewEntry():
+    form = newEntryForm(request.form)
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        author = form.author.data
+        journal_entry = form.journal_entry.data
+
+        #  CREATE CURSOR
+        cur = mysql.connection.cursor()
+
+        # EXECUTE QUERY
+        cur.execute('''INSERT INTO entries(title, author, journal_entry) VALUES(%s, %s, %s)''', (title, author, journal_entry))
+
+        #  COMMIT TO DATABASE
+        mysql.connection.commit()
+
+        # CLOSE THE CONNECTION
+        cur.close()
+
+        return redirect('/read')
+
+    return render_template('create.html', form=form)
 
 
 
+
+
+
+# ######################## READ ###########################################
 # VIEW ALL JOURNAL ENTRIES
 @app.route('/read')
 def read():
@@ -74,6 +103,28 @@ def read():
 
         return render_template('journal_entries.html', entries = Entries)
 
+#  GET SPECIFIC JOURNAL ENTRY BY ITS ID
+@app.route('/journal_entry/<string:id>/')
+def journal_entry(id):
+    #  CREATE CURSOR
+    cur = mysql.connection.cursor()
+
+    # EXECUTE QUERY
+    cur.execute('''SELECT * FROM entries WHERE id = %s''', [id])
+
+    #  COMMIT TO DATABASE
+    mysql.connection.commit()
+
+    entry = cur.fetchall()
+
+    # CLOSE THE CONNECTION
+    cur.close()
+    return render_template('journal_entry.html', entry = entry[0])
+
+
+
+
+# ######################## UPDATE ###########################################
  # UPDATE A JOURNAL ENTRY
 @app.route('/update/<string:id>', methods=['PUT', 'GET'])
 def update(id):
@@ -113,6 +164,7 @@ def update(id):
     return render_template('update.html', entry = Entry[0])
 
 
+# ######################## DELETE ###########################################
  # DELETE A JOURNAL ENTRY
 @app.route('/delete/<string:id>', methods=['GET', 'DELETE'])
 def delete(id):
@@ -153,58 +205,6 @@ def delete(id):
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-
-
-
-
-
-
-#  GET SPECIFIC JOURNAL ENTRY BY ITS ID
-@app.route('/journal_entry/<string:id>/')
-def journal_entry(id):
-    #  CREATE CURSOR
-    cur = mysql.connection.cursor()
-
-    # EXECUTE QUERY
-    cur.execute('''SELECT * FROM entries WHERE id = %s''', [id])
-
-    #  COMMIT TO DATABASE
-    mysql.connection.commit()
-
-    entry = cur.fetchall()
-
-    # CLOSE THE CONNECTION
-    cur.close()
-    return render_template('journal_entry.html', entry = entry[0])
-
-
-
-
-#  CREATE A NEW JOURNAL ENTRY
-@app.route('/create', methods=['GET', 'POST'])
-def createNewEntry():
-    form = newEntryForm(request.form)
-    if request.method == 'POST' and form.validate():
-        title = form.title.data
-        author = form.author.data
-        journal_entry = form.journal_entry.data
-
-        #  CREATE CURSOR
-        cur = mysql.connection.cursor()
-
-        # EXECUTE QUERY
-        cur.execute('''INSERT INTO entries(title, author, journal_entry) VALUES(%s, %s, %s)''', (title, author, journal_entry))
-
-        #  COMMIT TO DATABASE
-        mysql.connection.commit()
-
-        # CLOSE THE CONNECTION
-        cur.close()
-
-        return redirect('/read')
-
-    return render_template('create.html', form=form)
 
 
 ############## RUN THE APP ###############

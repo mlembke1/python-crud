@@ -37,4 +37,5 @@ $(document).ready(() => {
         })
       })
 
+      $('.loader').fadeOut(2500)
 })

@@ -43,8 +43,9 @@ class updateEntryForm(Form):
 ############# ROUTES #############
 # GET HOME PAGE
 @app.route('/')
-def home():
-    return render_template('home.html')
+def getHome():
+    return render_template('home.html', home='home')
+
 
 # ######################## CREATE ###########################################
 #  CREATE A NEW JOURNAL ENTRY

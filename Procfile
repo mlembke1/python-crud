@@ -1,1 +1,1 @@
-web: gunicorn deploy:write-flask
+web: gunicorn write-flask:app

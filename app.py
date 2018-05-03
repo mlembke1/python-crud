@@ -2,8 +2,7 @@
 import os
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 from flask_json import FlaskJSON, json_response
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
-from passlib.hash import sha256_crypt
+from wtforms import Form, StringField, TextAreaField, validators
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)

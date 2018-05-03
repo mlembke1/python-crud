@@ -11,3 +11,4 @@ tornado==5.0.2
 virtualenv==15.2.0
 Werkzeug==0.14.1
 WTForms==2.1
+Flask-JSON==0.3.2

@@ -21,9 +21,9 @@ app.secret_key=os.environ.get('SECRET_KEY')
 
 # MYSQL CONFIGURATION WHEN DEPLOYED
 app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
-app.config['MYSQL_USER'] = 'b43c45647f5a8f'
-app.config['MYSQL_PASSWORD'] = '23cb224a'
-app.config['MYSQL_DB'] = 'heroku_48ce68a75f1876f'
+app.config['MYSQL_USER'] = 'b096cdb5fd6e82'
+app.config['MYSQL_PASSWORD'] = '00b68419'
+app.config['MYSQL_DB'] = 'heroku_522c108c9a6b460'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 

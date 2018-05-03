@@ -9,7 +9,6 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 json = FlaskJSON(app)
 
-
 # # MYSQL CONFIGURATION LOCAL
 # app.config['MYSQL_HOST'] = 'localhost'
 # app.config['MYSQL_USER'] = 'mitch'
@@ -25,14 +24,11 @@ app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
 app.config['MYSQL_USER'] = 'b43c45647f5a8f'
 app.config['MYSQL_PASSWORD'] = '23cb224a'
 app.config['MYSQL_DB'] = 'heroku_48ce68a75f1876f'
-app.config['MYSQL_PORT'] = 5000
+app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # INITIATE MYSQL
-mysql = MySQL()
-mysql.init_app(app)
-
-
+mysql = MySQL(app)
 
 ######## SERVER SIDE VALIDATION FOR FORM ######
 class newEntryForm(Form):
@@ -44,7 +40,6 @@ class updateEntryForm(Form):
     author = StringField('Author', [validators.Length(min=1, max=50)])
     title  = StringField('Title', [validators.Length(min=4, max=50)])
     journal_entry  = StringField('Journal Entry', [validators.Length(min=4, max=500)])
-
 
 ############# ROUTES #############
 # GET HOME PAGE
@@ -77,11 +72,6 @@ def createNewEntry():
         return redirect('/read')
 
     return render_template('create.html', form=form)
-
-
-
-
-
 
 # ######################## READ ###########################################
 # VIEW ALL JOURNAL ENTRIES
@@ -120,9 +110,6 @@ def journal_entry(id):
     # CLOSE THE CONNECTION
     cur.close()
     return render_template('journal_entry.html', entry = entry[0])
-
-
-
 
 # ######################## UPDATE ###########################################
  # UPDATE A JOURNAL ENTRY
@@ -163,7 +150,6 @@ def update(id):
 
     return render_template('update.html', entry = Entry[0])
 
-
 # ######################## DELETE ###########################################
  # DELETE A JOURNAL ENTRY
 @app.route('/delete/<string:id>', methods=['GET', 'DELETE'])
@@ -199,13 +185,10 @@ def delete(id):
 
     return render_template('delete.html', entry = Entry[0])
 
-
-
 #  ABOUT ME
 @app.route('/about')
 def about():
     return render_template('about.html')
-
 
 ############## RUN THE APP ###############
 if __name__ == '__main__':

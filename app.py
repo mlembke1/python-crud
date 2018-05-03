@@ -19,7 +19,7 @@ json = FlaskJSON(app)
 # SET SECRET KEY
 app.secret_key=os.environ.get('SECRET_KEY')
 
-# MYSQL CONFIGURATION DEPLOYED
+# MYSQL CONFIGURATION WHEN DEPLOYED
 app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
 app.config['MYSQL_USER'] = 'b43c45647f5a8f'
 app.config['MYSQL_PASSWORD'] = '23cb224a'

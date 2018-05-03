@@ -25,7 +25,8 @@ a {
 }
 
 #feather {
-  margin-top: 5px;
+  margin: 6px 0 0 5px;
+  width: 80%;
 }
 
 /************* HEADER STYLES ***********/

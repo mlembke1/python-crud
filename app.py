@@ -27,7 +27,7 @@ app.config['MYSQL_DB'] = 'heroku_522c108c9a6b460'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
-# INITIATE MYSQL
+# INITIATES MYSQL
 mysql = MySQL(app)
 
 ######## SERVER SIDE VALIDATION FOR FORM ######

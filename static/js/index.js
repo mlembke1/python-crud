@@ -16,7 +16,7 @@ $(document).ready(() => {
             data: formInput,
             success: (result) => {
               if(result.message === 'success'){
-                window.location = 'http://localhost:5000/read'
+                window.location = 'https://write-flask.herokuapp.com/read'
               }
             }
         })
@@ -31,7 +31,7 @@ $(document).ready(() => {
             type: 'DELETE',
             success: (data) => {
                 if(data.message === 'success'){
-                  window.location = 'http://localhost:5000/read'
+                  window.location = 'https://write-flask.herokuapp.com/read'
                 }
             }
         })

@@ -3,17 +3,6 @@ body {
   -webkit-font-smoothing: antialiased;
   /* background-color: #1B101F; */
 }
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  /* background: url(http://magdeleine.co/wp-content/uploads/2015/07/photo-1418226970361-9f1f7227d638-1400x933.jpeg) 50% 50% no-repeat; */
-  background-size: cover;
-  opacity: 0.25;
-}
 
 .loader,
 .loader__figure {
@@ -182,6 +171,37 @@ body::before {
   margin-top: 20%;
 }
 
+/* LANDING PAGE HEADER UNDERLINING */
+
+
+#landing-page-header {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 3px;
+  margin-bottom: 0;
+}
+
+@-webkit-keyframes border {
+     from {width: 0px;}
+     to {width:100%}
+}
+
+#landing-page-header:after {
+  content: '';
+  display: block;
+  margin: auto;
+  height: 1px;
+  width: 0px;
+  background: black;
+  -webkit-animation-name: border; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+  animation-name: border;
+  animation-duration: 1s;
+  animation-delay: 3.5s;
+  animation-fill-mode: forwards;
+}
+
 @media (max-width: 450px) {
   .home-header {
     margin-top: 50%;
@@ -190,4 +210,6 @@ body::before {
 
 .letter-spacing {
   letter-spacing: 30px;
+  margin-left:25px;
+  padding-bottom: 10px;
 }

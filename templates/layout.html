@@ -13,11 +13,18 @@
     {% if home %}
         <link rel="stylesheet" href="../../static/css/homepage.css">
     {% endif %}
+    {% if start %}
+        <link rel="stylesheet" href="../../static/css/start.css">
+    {% endif %}
     <title>Write</title>
   </head>
   <body>
     <main>
-      {% include 'includes/_navbar.html' %}
+      {% if home or start or about %}
+          {% include 'includes/_landingpage-navbar.html' %}
+      {% else %}
+          {% include 'includes/_user-navbar.html' %}
+      {% endif %}
       <div class="container">
         {% block body %} {% endblock %}
       </div>

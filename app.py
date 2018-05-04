@@ -47,6 +47,16 @@ def getHome():
     return render_template('home.html', home='home')
 
 
+# GET START PAGE --- LOGIN / SIGNUP
+@app.route('/start')
+def getStart():
+    return render_template('start.html', start='start')
+
+#  ABOUT ME PAGE
+@app.route('/about')
+def about():
+    return render_template('about.html', about='about')
+
 # ######################## CREATE ###########################################
 #  CREATE A NEW JOURNAL ENTRY
 @app.route('/create', methods=['GET', 'POST'])
@@ -184,11 +194,6 @@ def delete(id):
     cur.close()
 
     return render_template('delete.html', entry = Entry[0])
-
-#  ABOUT ME
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 ############## RUN THE APP ###############
 if __name__ == '__main__':

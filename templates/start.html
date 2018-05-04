@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+ {% block body %}
+   <div class="signup-login-wrapper">
+    <ul class="collapsible popout">
+      <li>
+        <h3 class="collapsible-header" id="login-collapsible">LOGIN</h3>
+        <div class="collapsible-body">
+          <form class="form" id='login-form' method="post">
+
+            <label for="username-login">USERNAME:</label>
+            <span class="signup-error login-form-username-error"></span>
+            <input type="text" id='username-login' name="usernameLogin" required>
+
+            <label for="password-login">PASSWORD:</label>
+            <input type="password" id="password-login" name="passwordLogin" required>
+
+            <button type="submit" id='login-submit-button' class='btn waves-effect waves-light'>LOGIN</button>
+            <span class="signup-error" id="general-login-error"></span>
+          </form>
+        </div>
+      </li>
+      <li>
+        <h3 class="collapsible-header" id="signup-collapsible">SIGNUP</h3>
+        <div class="collapsible-body">
+          <form class="form" id="signup-form" method="post">
+            <label for="username-signup">USERNAME:</label>
+            <span class="signup-error signup-form-username-error"></span>
+            <input min="8" max="30" type="text" id='username-signup' name="usernameSignup" required>
+
+
+            <label for="email-signup">EMAIL:</label>
+            <span class="signup-error signup-form-email-error"></span>
+            <input type="email" id='email-signup' name="emailSignup" required>
+
+            <label for="password-signup">PASSWORD:</label>
+            <span class="signup-error signup-form-password-error"></span>
+            <input min="8" max="30" type="password" id="password-signup" name="passwordSignup" required>
+
+            <label for="confirm-password-signup">CONFIRM PASSWORD:</label>
+            <span class="signup-error signup-form-password-error"></span>
+            <input min="8" max="30" type="password" id="confirm-password-signup" name="confirmPasswordSignup" required>
+
+            <br>
+            <button type="submit" id='signup-submit-button' class='btn btn-small waves-effect waves-light'>SIGNUP</button>
+            <span class="signup-error" id="general-signup-error"></span>
+          </form>
+        </div>
+      </li>
+    </ul>
+   </div>
+ {% endblock %}

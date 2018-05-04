@@ -37,5 +37,23 @@ $(document).ready(() => {
         })
       })
 
-      $('.loader').fadeOut(2500)
+      // ANIMATION FOR HOMEPAGE LOAD
+      $('.loader').fadeOut(2000)
+
+      // SIGNUP / LOGIN POPOUT FUNCTIONALITY
+      $('.collapsible').collapsible()
+
+      // Typing Effect
+      var i = 0;
+      var txt = 'A JOURNALING APPLICATION BUILT ON THE PYTHON FLASK FRAMEWORK.'; /* The text */
+      var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+      function typeWriter() {
+        if (i < txt.length) {
+          document.getElementById("typing").innerHTML += txt.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+      setTimeout(() => typeWriter(), 1000)
 })

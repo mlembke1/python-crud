@@ -13,13 +13,6 @@ import os
 app = Flask(__name__)
 json = FlaskJSON(app)
 
-# # MYSQL CONFIGURATION LOCAL
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'mitch'
-# app.config['MYSQL_PASSWORD'] = 'mlembke1'
-# app.config['MYSQL_DB'] = 'entries'
-# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
 # SET SECRET KEY
 app.secret_key = os.environ.get('SECRET_KEY')
 
@@ -64,8 +57,9 @@ class loginForm(Form):
 # GET HOME PAGE
 @app.route('/')
 def getHome():
-    # if not session.username:
-        return render_template('home.html', home='home', whichPage='home')
+    if 'logged_in' in session:
+        return redirect(url_for('read'))
+    return render_template('home.html', home='home', whichPage='home')
     # return  render_template(url_for('read'))
 
 # GET START PAGE --- LOGIN / SIGNUP
@@ -112,7 +106,7 @@ def signup():
         session['logged_in'] = True
         session['username'] = username
 
-        return redirect(url_for('read'), isLoggedIn = True)
+        return redirect(url_for('read'))
 
 
 #  CREATE A NEW JOURNAL ENTRY
@@ -173,9 +167,9 @@ def login():
             session['username'] = username
             return redirect(url_for('read'))
 
-        return render_template('start.html', isLoggedIn = True)
+        return redirect('/start#login-collapsible')
 
-    return render_template('start.html', isLoggedIn = True)
+    return redirect('/start#login-collapsible')
 
 
 # GET ALL USERS

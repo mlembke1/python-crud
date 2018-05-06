@@ -30,7 +30,7 @@ const checkEmail = () => {
     .done((result) => {
       const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
       const enteredEmail = $('#email-signup').val().toLowerCase()
-      const emails = result.map(x => x.email)
+      const emails = result.allUsers.map(x => x.email)
       emailIsTaken = emails.includes(enteredEmail) ? true : false
       if (emailIsTaken) {
         $('.signup-form-email-error').empty()
@@ -46,46 +46,33 @@ const checkEmail = () => {
 }
 //
 //
-// const checkPasswords = () => {
-//   const firstPass = $('#password-signup').val()
-//   const secondPass = $('#confirm-password-signup').val()
-//   if (firstPass !== secondPass) {
-//     $('.signup-form-password-error').empty()
-//     $('.signup-form-password-error').text('Whoops, these passwords don\'t match.')
-//     passwordsMatch = false
-//   } else if (firstPass.length < 8 || secondPass.length < 8) {
-//     $('.signup-form-password-error').empty()
-//     $('.signup-form-password-error').text('Please make it longer than 8 characters.')
-//   } else if (firstPass.length > 30 || secondPass.length > 30) {
-//     $('.signup-form-password-error').empty()
-//     $('.signup-form-password-error').text('Please keep it shorter than 30 characters.')
-//   } else {
-//     $('.signup-form-password-error').empty()
-//     $('#general-signup-error').empty()
-//     passwordsMatch = true
-//   }
-// }
+const checkPasswords = () => {
+  const firstPass = $('#password-signup').val()
+  const secondPass = $('#confirm-password-signup').val()
+  if (firstPass !== secondPass) {
+    $('.signup-form-password-error').empty()
+    $('.signup-form-password-error').text('Whoops, these passwords don\'t match.')
+    passwordsMatch = false
+  } else if (firstPass.length < 8 || secondPass.length < 8) {
+    $('.signup-form-password-error').empty()
+    $('.signup-form-password-error').text('Please make it longer than 8 characters.')
+  } else if (firstPass.length > 30 || secondPass.length > 30) {
+    $('.signup-form-password-error').empty()
+    $('.signup-form-password-error').text('Please keep it shorter than 30 characters.')
+  } else {
+    $('.signup-form-password-error').empty()
+    $('#general-signup-error').empty()
+    passwordsMatch = true
+  }
+}
 
-// // CREATE THE OBJECT THAT WILL ACT AS THE REQ.BODY
-// const createRequestSignup = () => {
-//   return {
-//     signupUsername: $('#username-signup').val(),
-//     signupEmail: $('#email-signup').val(),
-//     signupPassword: $('#password-signup').val(),
-//     signupConfirmPassword: $('#confirm-password-signup').val()
-//   }
-// }
-
-// CHECK FOR COOKIE TO APPROVE LOGIN
-// const getCookieInfo = () => {
-//   $.get('/cookie')
-//     .done((result) => {
-//       // console.log(result.message)
-//       if (result.message === 'Success') {
-//         window.location = '/home'
-//       }
-//     })
-// }
+const isSignupFormValid = () => {
+  if(userNameIsTaken || emailIsTaken || !passwordsMatch){
+    return $('#signup-submit-button').attr('disabled', true)
+  } else {
+    return $('#signup-submit-button').attr('disabled', false)
+  }
+}
 
 $(document).ready(() => {
   // MAKE SIGNUP/LOGIN BUTTONS FUNCTIONAL.
@@ -96,51 +83,40 @@ $(document).ready(() => {
     $('#signup-collapsible').trigger('click')
   }
 
-  // // WHEN USER HITS LOGIN PAGE, FIRST CHECK IF COOKIE EXISTS,
-  // // AND REDIRECT IF SO
-  // getCookieInfo()
+  // BY DEFAULT, DO NOT ALLOW THEM TO SUBMIT THE FORM
+  $('#signup-submit-button').attr('disabled', true)
 
   // WHEN USER FOCUSES OUT OF USERNAME INPUT,
   // CHECK DATABASE TO SEE IF USERNAME IS ALREADY TAKEN
   $('#username-signup').focusout((event) => {
     checkUsernameSignup()
+    isSignupFormValid()
   })
-  //
-  // // WHEN USER FOCUSES OUT OF EMAIL INPUT,
-  // // CHECK DATABASE TO SEE IF EMAIL IS ALREADY TAKEN
-  // $('#email-signup').focusout((event) => {
-  //   checkEmail()
-  // })
-  //
-  //
-  // // WHEN USER FOCUSES OUT OF CONFRIM PASSWORD INPUT,
-  // // CHECK DATABASE TO SEE IF EMAIL IS ALREADY TAKEN
-  // $('#confirm-password-signup').keyup((event) => {
-  //   checkPasswords()
-  // })
 
+  // WHEN USER FOCUSES OUT OF EMAIL INPUT,
+  // CHECK DATABASE TO SEE IF EMAIL IS ALREADY TAKEN
+  $('#email-signup').focusout((event) => {
+    checkEmail()
+    isSignupFormValid()
+  })
 
-  // Handle submit event
-  // $('#signup-submit-button').click((event) => {
-  //   event.preventDefault()
-  //   // Make POST request with form field data as POST body
-  //   if (passwordsMatch === true && emailIsTaken === false && userNameIsTaken === false) {
-  //     $('#general-signup-error').empty()
-  //     $.ajax({
-  //       url: '/start/signup',
-  //       type: 'POST',
-  //       dataType: 'json',
-  //       contentType: 'application/json; charset=utf-8',
-  //       data: JSON.stringify(createRequestSignup()),
-  //       success: (data) => {
-  //         if (data.message === 'success') {
-  //           window.location = '/home'
-  //         }
-  //       }
-  //     }) // end ajax
-  //   } else {
-  //     $('#general-signup-error').empty()
-  //     $('#general-signup-error').text('Your input isn\'t quite correct.')
-  //   }
-  // }) // end submit handler
+  // WHEN USER FOCUSES OUT OF CONFRIM PASSWORD INPUT,
+  // CHECK DATABASE TO SEE IF EMAIL IS ALREADY TAKEN
+    $('#confirm-password-signup').keyup((event) => {
+      checkPasswords()
+      isSignupFormValid()
+    })
+
+    $('#password-signup').keyup((event) => {
+      checkPasswords()
+      isSignupFormValid()
+    })
+
+    $('#confirm-password-signup').focusout((event) => {
+      isSignupFormValid()
+    })
+
+    $('#password-signup').focusout((event) => {
+      isSignupFormValid()
+    })
 }) // End document ready

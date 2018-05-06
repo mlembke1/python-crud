@@ -17,7 +17,11 @@
             <input class="form-control" type="password" id="password-login" name="password" required value="{{request.form.password}}">
 
             <button type="submit" id='login-submit-button' class='btn waves-effect waves-light'>LOGIN</button>
-            <span class="signup-error" id="general-login-error"></span>
+            <span class="signup-error" id="general-login-error">
+              {% if loginFailed %}
+                <p>Username or password is incorrect.</p>
+              {% endif %}
+            </span>
           </form>
         </div>
       </li>

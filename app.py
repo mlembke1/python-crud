@@ -1,9 +1,14 @@
 ####### IMPORTING DEPENDENCIES #########
-import os
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 from flask_json import FlaskJSON, json_response
-from wtforms import Form, StringField, TextAreaField, validators
+from wtforms import Form, StringField, TextAreaField, validators, PasswordField
 from flask_mysqldb import MySQL
+from passlib.hash import sha256_crypt
+from dotenv import load_dotenv
+from pathlib import Path
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+import os
 
 app = Flask(__name__)
 json = FlaskJSON(app)
@@ -16,7 +21,7 @@ json = FlaskJSON(app)
 # app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # SET SECRET KEY
-app.secret_key=os.environ.get('SECRET_KEY')
+app.secret_key = os.environ.get('SECRET_KEY')
 
 # MYSQL CONFIGURATION WHEN DEPLOYED
 app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
@@ -40,38 +45,63 @@ class updateEntryForm(Form):
     title  = StringField('Title', [validators.Length(min=4, max=50)])
     journal_entry  = StringField('Journal Entry', [validators.Length(min=4, max=500)])
 
+class signupForm(Form):
+    username = StringField('Username', [validators.Length(min=1, max=50)])
+    email = StringField('Email', [validators.Length(min=1, max=50)])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message="Passwords do not match"),
+        validators.Length(min=4, max=50)
+    ])
+    confirm = PasswordField('Confirm Password')
+
+
+class loginForm(Form):
+    username = StringField('Username', [validators.Length(min=1, max=50)])
+    password = StringField('Password', [validators.Length(min=4, max=50)])
+
 ############# ROUTES #############
 # GET HOME PAGE
 @app.route('/')
 def getHome():
-    return render_template('home.html', home='home')
-
+    # if not session.username:
+        return render_template('home.html', home='home', whichPage='home')
+    # return  render_template(url_for('read'))
 
 # GET START PAGE --- LOGIN / SIGNUP
 @app.route('/start')
 def getStart():
-    return render_template('start.html', start='start')
-
+    # if not session.username:
+        return render_template('start.html', start='start', whichPage='start')
+    # return  render_template(url_for('read'))
 #  ABOUT ME PAGE
 @app.route('/about')
 def about():
-    return render_template('about.html', about='about')
+    # if not session.username:
+        return render_template('about.html', about='about', whichPage='about')
+    # return  render_template(url_for('read'))
 
-# ######################## CREATE ###########################################
-#  CREATE A NEW JOURNAL ENTRY
-@app.route('/create', methods=['GET', 'POST'])
-def createNewEntry():
-    form = newEntryForm(request.form)
-    if request.method == 'POST' and form.validate():
-        title = form.title.data
-        author = form.author.data
-        journal_entry = form.journal_entry.data
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('getHome'))
+
+######################### CREATE #######################################
+# CREATE A NEW USER
+@app.route('/signup', methods=['POST'])
+def signup():
+    # if not session.username:
+        form = signupForm(request.form)
+        # if form.validate():
+        username = form.username.data
+        email = form.email.data
+        password = sha256_crypt.hash(form.password.data)
 
         #  CREATE CURSOR
         cur = mysql.connection.cursor()
 
         # EXECUTE QUERY
-        cur.execute('''INSERT INTO entries(title, author, journal_entry) VALUES(%s, %s, %s)''', (title, author, journal_entry))
+        cur.execute('''INSERT INTO users(username, email, password) VALUES(%s, %s, %s)''', (username, email, password))
 
         #  COMMIT TO DATABASE
         mysql.connection.commit()
@@ -79,19 +109,105 @@ def createNewEntry():
         # CLOSE THE CONNECTION
         cur.close()
 
-        return redirect('/read')
+        session['logged_in'] = True
+        session['username'] = username
 
-    return render_template('create.html', form=form)
+        return redirect(url_for('read'), isLoggedIn = True)
+
+
+#  CREATE A NEW JOURNAL ENTRY
+@app.route('/create', methods=['GET', 'POST'])
+def createNewEntry():
+    # if session.username:
+        form = newEntryForm(request.form)
+        if request.method == 'POST' and form.validate():
+            title = form.title.data
+            author = form.author.data
+            journal_entry = form.journal_entry.data
+            username = session['username']
+
+            #  CREATE CURSOR
+            cur = mysql.connection.cursor()
+
+            # EXECUTE QUERY
+            cur.execute('''INSERT INTO entries(title, author, journal_entry, username) VALUES(%s, %s, %s, %s)''', (title, author, journal_entry, username))
+
+            #  COMMIT TO DATABASE
+            mysql.connection.commit()
+
+            # CLOSE THE CONNECTION
+            cur.close()
+
+            return redirect('/read')
+
+        return render_template('create.html', form=form, isLoggedIn=True)
+
 
 # ######################## READ ###########################################
-# VIEW ALL JOURNAL ENTRIES
-@app.route('/read')
-def read():
+# LOGIN ROUTE
+@app.route('/login', methods=['POST'])
+def login():
+    form = loginForm(request.form)
+    username = form.username.data
+    password = form.password.data
+
+
+    if username:
         #  CREATE CURSOR
         cur = mysql.connection.cursor()
 
         # EXECUTE QUERY
-        cur.execute('''SELECT * FROM entries''')
+        cur.execute('''SELECT password FROM users WHERE username = %s''', [username])
+
+        #  COMMIT TO DATABASE
+        mysql.connection.commit()
+
+        hashed_password = cur.fetchall()
+        app.logger.info(hashed_password)
+
+        # CLOSE THE CONNECTION
+        cur.close()
+
+        if sha256_crypt.verify(password, hashed_password[0]['password']):
+            session['logged_in'] = True
+            session['username'] = username
+            return redirect(url_for('read'))
+
+        return render_template('start.html', isLoggedIn = True)
+
+    return render_template('start.html', isLoggedIn = True)
+
+
+# GET ALL USERS
+@app.route('/start/users')
+def getAllUsers():
+    #  CREATE CURSOR
+    cur = mysql.connection.cursor()
+
+    # EXECUTE QUERY
+    cur.execute('''SELECT * FROM users''')
+
+    #  COMMIT TO DATABASE
+    mysql.connection.commit()
+
+    allUsers = cur.fetchall()
+
+    # CLOSE THE CONNECTION
+    cur.close()
+
+    return json_response(allUsers=allUsers)
+
+
+# VIEW ALL JOURNAL ENTRIES
+@app.route('/read')
+def read():
+    # if session.username:
+        username = session['username']
+        #  CREATE CURSOR
+        cur = mysql.connection.cursor()
+
+        # EXECUTE QUERY
+        cur.execute('''SELECT * FROM entries WHERE username = %s''', [username])
 
         #  COMMIT TO DATABASE
         mysql.connection.commit()
@@ -101,7 +217,8 @@ def read():
         # CLOSE THE CONNECTION
         cur.close()
 
-        return render_template('journal_entries.html', entries = Entries)
+        return render_template('journal_entries.html', entries = Entries, isLoggedIn = True)
+    # return redirect(url_for('signup'))
 
 #  GET SPECIFIC JOURNAL ENTRY BY ITS ID
 @app.route('/journal_entry/<string:id>/')
@@ -158,7 +275,7 @@ def update(id):
     # CLOSE THE CONNECTION
     cur.close()
 
-    return render_template('update.html', entry = Entry[0])
+    return render_template('update.html', entry = Entry[0], whichPage='update')
 
 # ######################## DELETE ###########################################
  # DELETE A JOURNAL ENTRY
@@ -193,7 +310,7 @@ def delete(id):
     # CLOSE THE CONNECTION
     cur.close()
 
-    return render_template('delete.html', entry = Entry[0])
+    return render_template('delete.html', entry = Entry[0], whichPage='delete')
 
 ############## RUN THE APP ###############
 if __name__ == '__main__':

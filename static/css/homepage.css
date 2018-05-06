@@ -172,8 +172,6 @@ body {
 }
 
 /* LANDING PAGE HEADER UNDERLINING */
-
-
 #landing-page-header {
   display: inline-block;
   position: relative;
@@ -197,8 +195,8 @@ body {
   -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
   -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
   animation-name: border;
-  animation-duration: 1s;
-  animation-delay: 3.5s;
+  animation-duration: 30;
+  animation-delay: 1s;
   animation-fill-mode: forwards;
 }
 

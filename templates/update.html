@@ -17,7 +17,7 @@
             <div class="form-group">
           		<textarea id="update-journal_entry-input" placeholder="JOURNAL ENTRY: {{entry.journal_entry}}" type="text" name="journal_entry" value='{{request.form.journal_entry}}' class="form-control"></textarea>
           	</div>
-          	<input data-id="{{entry.id}}" id="confirm-update-button" type="submit" class="update-button btn" value="Update">
+          	<input data-id="{{entry.id}}" id="confirm-update-button" type="submit" class="update-button btn" value="Update" disabled>
             <a href="/read"><input type="button" class='btn back-to-read' value='CANCEL'></a>
           </form>
         </div>

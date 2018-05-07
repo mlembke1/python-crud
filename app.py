@@ -137,7 +137,7 @@ def createNewEntry():
             # CLOSE THE CONNECTION
             cur.close()
 
-            return redirect('/read')
+            return redirect(url_for('read'))
 
         return render_template('create.html', form=form, isLoggedIn=True)
 

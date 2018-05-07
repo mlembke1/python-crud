@@ -211,3 +211,14 @@ body {
   margin-left:25px;
   padding-bottom: 10px;
 }
+
+
+.signup-login-button {
+  transition: .3s;
+}
+
+.signup-login-button:hover {
+  color: black !important;
+  background-color: white;
+  border: 1px solid black;
+}

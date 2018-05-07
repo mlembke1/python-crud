@@ -111,17 +111,50 @@ button.btn:hover,
   display: inline-block;
 }
 
-/* .update-button {
-  background-color: tan !important;
-} */
+#confirm-update-button {
+  background-color: black !important;
+}
+
+#confirm-update-button:hover {
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid black;
+  transform: scale(1.1);
+}
+
+.back-to-read {
+  background-color: black !important;
+}
+
+.back-to-read:hover {
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid black;
+  transform: scale(1.1);
+}
 
 .delete-button {
   background-color: #EB9486 !important;
 }
 
+#confirm-delete-button {
+  transition: .3s;
+}
+
+#confirm-delete-button:hover {
+  background-color: white !important;
+  color: tomato !important;
+  border: 1px solid tomato !important;
+  transform: scale(1.1);
+}
+
 
 #create-entry-button, .update-button, .back-to-read {
   background-color: grey !important;
+}
+
+button, input[type=button], input[type=submit] {
+  margin: 0 .5em;
 }
 
 

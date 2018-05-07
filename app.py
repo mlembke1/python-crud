@@ -274,7 +274,7 @@ def update(id):
     # CLOSE THE CONNECTION
     cur.close()
 
-    return render_template('update.html', entry = Entry[0], whichPage='update')
+    return render_template('update.html', entry = Entry[0], whichPage='update', isLoggedIn=True)
 
 # ######################## DELETE ###########################################
  # DELETE A JOURNAL ENTRY
@@ -309,7 +309,7 @@ def delete(id):
     # CLOSE THE CONNECTION
     cur.close()
 
-    return render_template('delete.html', entry = Entry[0], whichPage='delete')
+    return render_template('delete.html', entry = Entry[0], whichPage='delete', isLoggedIn=True)
 
 ############## RUN THE APP ###############
 if __name__ == '__main__':

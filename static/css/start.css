@@ -1,14 +1,15 @@
 /***************SIGNUP / LOGIN **************/
 
 
-.signup-login-button {
+#login-submit-button, #signup-submit-button {
   transition: .3s;
 }
 
-.signup-login-button:hover {
+#login-submit-button:hover, #signup-submit-button:hover {
   color: black !important;
   background-color: white;
   border: 1px solid black;
+  transform: scale(1.1);
 }
 
 .collapsible input,

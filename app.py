@@ -11,10 +11,12 @@ load_dotenv(dotenv_path=env_path)
 import os
 
 app = Flask(__name__)
-json = FlaskJSON(app)
-
 # SET SECRET KEY
 app.secret_key = os.environ.get('SECRET_KEY')
+json = FlaskJSON(app)
+
+
+
 
 # MYSQL CONFIGURATION WHEN DEPLOYED
 app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'

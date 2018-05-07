@@ -111,11 +111,11 @@ button.btn:hover,
   display: inline-block;
 }
 
-#confirm-update-button {
+#confirm-update-button, #create-entry-button {
   background-color: black !important;
 }
 
-#confirm-update-button:hover {
+#confirm-update-button:hover,  #create-entry-button:hover  {
   color: black !important;
   background-color: white !important;
   border: 1px solid black;
@@ -141,7 +141,7 @@ button.btn:hover,
   transition: .3s;
 }
 
-#confirm-delete-button:hover {
+#confirm-delete-button:hover{
   background-color: white !important;
   color: tomato !important;
   border: 1px solid tomato !important;
@@ -149,7 +149,7 @@ button.btn:hover,
 }
 
 
-#create-entry-button, .update-button, .back-to-read {
+.update-button, .back-to-read {
   background-color: grey !important;
 }
 

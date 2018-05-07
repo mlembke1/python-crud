@@ -26,4 +26,5 @@ $(document).ready(() => {
       }
       setTimeout(() => typeWriter(), 1000)
 
+      
 })

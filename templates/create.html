@@ -9,15 +9,15 @@
         <div class="col-lg-6 col-sm-10">
          <form method="POST">
           	<div class="form-group">
-          		<input type="text" name="author" class="form-control" placeholder="Author" value="{{request.form.author}}">
+          		<input id="create-author-input" type="text" name="author" class="form-control" placeholder="Author" value="{{request.form.author}}">
           	</div>
           	<div class="form-group">
-          		<input type="text" name="title" class="form-control" placeholder="Title" value="{{request.form.title}}">
+          		<input id="create-title-input" type="text" name="title" class="form-control" placeholder="Title" value="{{request.form.title}}">
           	</div>
             <div class="form-group">
-          		<textarea type="text" name="journal_entry" class="form-control" placeholder="Write here..." value="{{request.form.journal_entry}}"></textarea>
+          		<textarea id="create-journal_entry-input" type="text" name="journal_entry" class="form-control" placeholder="Write here..." value="{{request.form.journal_entry}}"></textarea>
           	</div>
-          	<p><input id="create-entry-button" type="submit" class="btn" value="Submit"></p>
+          	<p><input id="create-entry-button" type="submit" class="btn" value="Submit" disabled></p>
           </form>
         </div>
       <div class="col-lg-3 col-sm-1"></div>

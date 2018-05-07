@@ -13,7 +13,9 @@ import os
 app = Flask(__name__)
 # SET SECRET KEY
 app.secret_key = os.environ.get('SECRET_KEY')
+app.config['SESSION_TYPE'] = 'filesystem'
 json = FlaskJSON(app)
+Session(app)
 
 
 

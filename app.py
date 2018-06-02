@@ -150,6 +150,7 @@ def createNewEntry():
 # LOGIN ROUTE
 @app.route('/login', methods=['POST'])
 def login():
+    app.logger.info(request)
     form = loginForm(request.form)
     username = form.username.data
     password = form.password.data

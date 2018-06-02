@@ -18,15 +18,19 @@ app.config['SESSION_TYPE'] = 'filesystem'
 json = FlaskJSON(app)
 Session(app)
 
-
+MYSQL_HOST = os.environ.get('MYSQL_HOST')
+MYSQL_USER = os.environ.get('MYSQL_USER')
+MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD')
+MYSQL_DB = os.environ.get('MYSQL_DB')
+MYSQL_PORT = os.environ.get('MYSQL_PORT')
 
 
 # MYSQL CONFIGURATION
-app.config['MYSQL_HOST'] = process.env.MYSQL_HOST
-app.config['MYSQL_USER'] = process.env.MYSQL_USER
-app.config['MYSQL_PASSWORD'] = process.env.MYSQL_PASSWORD
-app.config['MYSQL_DB'] = process.env.MYSQL_DB
-app.config['MYSQL_PORT'] = process.env.MYSQL_PORT
+app.config['MYSQL_HOST'] = MYSQL_HOST
+app.config['MYSQL_USER'] = MYSQL_USER
+app.config['MYSQL_PASSWORD'] = MYSQL_PASSWORD
+app.config['MYSQL_DB'] = MYSQL_DB
+app.config['MYSQL_PORT'] = MYSQL_PORT
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # INITIATES MYSQL

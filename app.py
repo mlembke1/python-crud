@@ -21,7 +21,7 @@ Session(app)
 
 
 
-# MYSQL CONFIGURATION
+# MYSQL CONFIGURATIONs
 app.config['MYSQL_HOST'] = process.env.MYSQL_HOST
 app.config['MYSQL_USER'] = process.env.MYSQL_USER
 app.config['MYSQL_PASSWORD'] = process.env.MYSQL_PASSWORD

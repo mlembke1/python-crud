@@ -183,7 +183,7 @@ def login():
 
 
 # GET ALL USERS
-@app.route('/start/users')
+@app.route('/start/users', methods=['GET'])
 def getAllUsers():
     #  CREATE CURSOR
     cur = mysql.connection.cursor()

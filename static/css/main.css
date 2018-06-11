@@ -228,3 +228,13 @@ footer .row .col.s12 {
   border-bottom: 1px solid tan;
   margin-top: 6em;
 }
+
+.about-page img {
+  width: 20%;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+.about-page h1 {
+  display: inline-block;
+}

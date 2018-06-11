@@ -229,12 +229,31 @@ footer .row .col.s12 {
   margin-top: 6em;
 }
 
+.about-page {
+  text-align: center;
+}
+
 .about-page img {
-  width: 20%;
+  width: 50%;
   border-radius: 50%;
   display: inline-block;
-  margin-right: 10px;
+  margin: auto;
 }
+
+@media (min-width: 768px){
+  .about-page {
+    text-align: inherit;
+  }
+
+  .about-page img {
+    margin-bottom: -20px;
+    width: 10%;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
 .about-page h1 {
   display: inline-block;
 }

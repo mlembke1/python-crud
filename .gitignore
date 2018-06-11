@@ -9,7 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-flask_session/
+/flask_session/
 build/
 develop-eggs/
 dist/

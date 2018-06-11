@@ -18,20 +18,14 @@ app.config['SESSION_TYPE'] = 'filesystem'
 json = FlaskJSON(app)
 Session(app)
 
-MYSQL_HOST = os.environ.get('MYSQL_HOST')
-MYSQL_USER = os.environ.get('MYSQL_USER')
-MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD')
-MYSQL_DB = os.environ.get('MYSQL_DB')
-MYSQL_PORT = os.environ.get('MYSQL_PORT')
-
-
 # MYSQL CONFIGURATION
-app.config['MYSQL_HOST'] = MYSQL_HOST
-app.config['MYSQL_USER'] = MYSQL_USER
-app.config['MYSQL_PASSWORD'] = MYSQL_PASSWORD
-app.config['MYSQL_DB'] = MYSQL_DB
-app.config['MYSQL_PORT'] = MYSQL_PORT
+app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-04.cleardb.net'
+app.config['MYSQL_USER'] = 'b096cdb5fd6e82'
+app.config['MYSQL_PASSWORD'] = '00b68419'
+app.config['MYSQL_DB'] = 'heroku_522c108c9a6b460'
+app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
 
 # INITIATES MYSQL
 mysql = MySQL(app)
@@ -150,7 +144,6 @@ def createNewEntry():
 # LOGIN ROUTE
 @app.route('/login', methods=['POST'])
 def login():
-    app.logger.info(request)
     form = loginForm(request.form)
     username = form.username.data
     password = form.password.data
@@ -167,7 +160,6 @@ def login():
         mysql.connection.commit()
 
         hashed_password = cur.fetchall()
-        app.logger.info(hashed_password)
 
         # CLOSE THE CONNECTION
         cur.close()
